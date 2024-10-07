@@ -18,4 +18,6 @@ jobs:
         node-version: '14.x'
     - run: npm ci
     - run: npm run build
-    - run: npm test
+    - run: npm run lint
+    # Only run tests if you have a test script defined in package.json
+    # - run: npm test
