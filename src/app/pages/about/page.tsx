@@ -9,7 +9,7 @@ export default function About() {
           Our mission is to propel your business to new heights by providing innovative solutions tailored to your unique needs. We pride ourselves on our ability to understand complex business challenges and deliver high-quality, scalable solutions that drive growth and efficiency.
         </p>
         <p className="text-lg">
-          At Rocket Kick, we're not just service providers – we're your technology partners, committed to your success every step of the way.
+          At Rocket Kick, we&apos;re not just service providers – we&apos;re your technology partners, committed to your success every step of the way.
         </p>
       </div>
     )
