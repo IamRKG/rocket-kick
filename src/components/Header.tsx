@@ -26,7 +26,7 @@ const Header = () => {
   ]
 
   return (
-    <header className={`fixed w-full z-50 bg-white transition-all duration-300 ${isScrolled ? 'shadow-lg py-2' : 'shadow-md py-4'}`}>
+    <header className={`fixed w-full z-50 bg-white transition-all duration-300 ${isScrolled ? 'shadow-lg py-2' : 'py-4'}`}>
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-xl sm:text-2xl font-bold text-blue-600 hover:text-blue-700 transition duration-300">

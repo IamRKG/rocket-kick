@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaReact, FaNodeJs, FaPython, FaAws, FaDocker } from 'react-icons/fa'
-import { SiKubernetes, SiGraphql, SiTypescript, SiNextdotjs, SiMongodb, SiPostgresql, SiMicrosoftazure } from 'react-icons/si'
+import { FaReact, FaNodeJs, FaAws, FaDocker } from 'react-icons/fa'
+import { SiKubernetes, SiGraphql, SiTypescript, SiNextdotjs, SiMongodb, SiPostgresql, SiMicrosoftazure, SiThreedotjs } from 'react-icons/si'
 
 const TechStackExpert: React.FC = () => {
   const [selectedTech, setSelectedTech] = useState<string | null>(null)
@@ -9,7 +9,7 @@ const TechStackExpert: React.FC = () => {
   const technologies = [
     { name: 'React', icon: <FaReact />, color: '#61DAFB', description: 'A JavaScript library for building user interfaces' },
     { name: 'Node.js', icon: <FaNodeJs />, color: '#339933', description: 'JavaScript runtime built on Chrome\'s V8 JavaScript engine' },
-    { name: 'Python', icon: <FaPython />, color: '#3776AB', description: 'An interpreted, high-level and general-purpose programming language' },
+    { name: 'Three.js', icon: <SiThreedotjs />, color: '#000000', description: 'JavaScript 3D library for creating and displaying animated 3D computer graphics in a web browser' },
     { name: 'AWS', icon: <FaAws />, color: '#FF9900', description: 'Comprehensive and broadly adopted cloud platform' },
     { name: 'Azure', icon: <SiMicrosoftazure />, color: '#0089D6', description: 'Cloud computing service for building, testing, deploying, and managing applications' },
     { name: 'Docker', icon: <FaDocker />, color: '#2496ED', description: 'Platform for developing, shipping, and running applications in containers' },
@@ -20,7 +20,6 @@ const TechStackExpert: React.FC = () => {
     { name: 'MongoDB', icon: <SiMongodb />, color: '#47A248', description: 'Source-available cross-platform document-oriented database program' },
     { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#336791', description: 'Powerful, open source object-relational database system' }
   ]
-
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto">
