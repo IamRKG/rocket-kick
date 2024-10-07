@@ -1,6 +1,8 @@
 # Rocket Kick Software and Consulting Services
 
-[![Vercel](https://vercelbadge.vercel.app/api/your-github-username/your-repo-name)](https://vercel.com/your-github-username/your-repo-name/deployments)
+[![Vercel](https://vercelbadge.vercel.app/api/IamRKG/rocket-kick-website)](https://vercel.com/IamRKG/rocket-kick-website/deployments)
+
+[Rest of your README content]
 
 [Rest of your README content]
 
