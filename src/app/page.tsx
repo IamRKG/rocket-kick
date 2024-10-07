@@ -1,6 +1,8 @@
 'use client'
 import Hero from '@/components/Hero'
 import ServiceCard from '@/components/ServiceCard'
+import TechStackExpert from '@/components/TechStackExpert'
+import Testimonials from '@/components/Testimonials'
 import softwareDevelopmentAnimation from '../animations/software-development.json'
 import consultingAnimation from '../animations/consulting.json'
 import cloudSolutionsAnimation from '../animations/cloud-solutions.json'
@@ -31,6 +33,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <TechStackExpert />
+      <Testimonials />
     </div>
   )
 }
