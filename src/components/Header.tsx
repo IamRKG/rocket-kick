@@ -1,40 +1,42 @@
 'use client'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 
-const Header = () => {
+import React from 'react'
+import { debounce } from 'lodash'
+
+const Header = React.memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = debounce(() => {
       setIsScrolled(window.scrollY > 20)
-    }
+    }, 100)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = debounce(() => {
       if (window.innerWidth >= 768) {
         setIsMenuOpen(false)
       }
-    }
+    }, 100)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   const isActive = (path: string) => pathname === path
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { href: '/', label: 'Home' },
     { href: '/pages/about', label: 'About' },
     { href: '/pages/services', label: 'Services' },
     { href: '/pages/contact', label: 'Contact' },
-  ]
-
+  ], [])
   return (
       <header className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white shadow-lg py-2' : 'bg-transparent py-4'
@@ -45,7 +47,7 @@ const Header = () => {
             isScrolled ? 'text-blue-600' : 'text-white'
           }`}>
             Rocket<span className={`bg-clip-text text-transparent bg-gradient-to-r ${
-              isScrolled ? 'from-blue-500 to-blue-700' : 'from-blue-300 to-blue-500'
+              isScrolled ? 'from-blue-500 to-blue-700' : 'from-blue-100 to-blue-300'
             }`}>Kick</span>
           </Link>
           <div className="hidden md:flex space-x-1 lg:space-x-6">
@@ -85,8 +87,8 @@ const Header = () => {
             </div>
           </button>
         </div>
-        <div className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-  isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+        <div className={`md:hidden transition-all duration-300 ease-in-out ${
+  isMenuOpen ? 'h-auto opacity-100 visible' : 'h-0 opacity-0 invisible'
 } ${isScrolled ? 'bg-white' : 'bg-black bg-opacity-70'}`}>
           {navItems.map(({ href, label }) => (
             <Link
@@ -110,6 +112,6 @@ const Header = () => {
       </nav>
     </header>
   )
-}
+})
 
 export default Header

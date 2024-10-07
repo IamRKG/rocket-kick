@@ -1,13 +1,17 @@
 'use client'
 import React from 'react'
 import Lottie, { LottieComponentProps } from 'lottie-react'
-
 interface ServiceCardProps {
   title: string
   description: string
   animation?: LottieComponentProps['animationData']
+  imageSrc?: string
+  imageAlt?: string
+  imageWidth?: number
+  imageHeight?: number
   icon?: React.ReactNode
 }
+
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, animation }) => {
   return (
