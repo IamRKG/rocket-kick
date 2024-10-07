@@ -6,18 +6,25 @@ import Link from 'next/link'
 import Lottie from 'lottie-react'
 import rocketAnimation from '../animations/rocket-tech.json'
 
+import React from 'react'
 
-const Hero = () => {
-  const [scrollY, setScrollY] = useState(0)
+const Hero = React.memo(() => {
   const controls = useAnimation()
   const [ref, inView] = useInView()
 
   // ... rest of the component
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const { top, height } = heroRef.current.getBoundingClientRect()
+        const scrollPercentage = Math.min(Math.max((top * -1) / height, 0), 1)
+        document.documentElement.style.setProperty('--hero-scroll', scrollPercentage.toString())
+      }
+    }
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [scrollY])
+  }, [])
   
   useEffect(() => {
     if (inView) {
@@ -46,41 +53,31 @@ const Hero = () => {
 
   const heroRef = useRef<HTMLDivElement>(null)
   const rocketRef = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
-    const handleScroll = () => {
-      if (heroRef.current) {
-        const { top, height } = heroRef.current.getBoundingClientRect()
-        const scrollPercentage = Math.min(Math.max((top * -1) / height, 0), 1)
-        heroRef.current.style.setProperty('--scroll', scrollPercentage.toString())
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  useEffect(() => {
+    let rafId: number
     const handleMouseMove = (e: MouseEvent) => {
-      if (rocketRef.current) {
-        const { clientX, clientY } = e
-        const { left, top, width, height } = rocketRef.current.getBoundingClientRect()
-        const x = (clientX - left - width / 2) / 25
-        const y = (clientY - top - height / 2) / 25
-        rocketRef.current.style.transform = `translate(${x}px, ${y}px)`
-      }
+      rafId = requestAnimationFrame(() => {
+        if (rocketRef.current) {
+          const { clientX, clientY } = e
+          const { left, top, width, height } = rocketRef.current.getBoundingClientRect()
+          const x = (clientX - left - width / 2) / 25
+          const y = (clientY - top - height / 2) / 25
+          rocketRef.current.style.transform = `translate(${x}px, ${y}px)`
+        }
+      })
     }
 
     window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      cancelAnimationFrame(rafId)
+    }
   }, [])
 
-
   return (
-    <motion.div
+    <>
+      
+      <motion.div
     ref={ref}
     initial="hidden"
     animate={controls}
@@ -125,6 +122,7 @@ const Hero = () => {
         </div>
       </div>
     </motion.div>
+    </>
   )
-}
+})
 export default Hero
