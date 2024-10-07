@@ -1,3 +1,11 @@
+# Rocket Kick Software and Consulting Services
+
+[![Vercel](https://vercelbadge.vercel.app/api/IamRKG/rocket-kick-website)](https://vercel.com/IamRKG/rocket-kick-website/deployments)
+
+[Rest of your README content]
+
+[Rest of your README content]
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
