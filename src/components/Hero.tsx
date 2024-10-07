@@ -85,7 +85,7 @@ const Hero = () => {
     initial="hidden"
     animate={controls}
     variants={containerVariants}
-    className="hero-content min-h-screen flex items-center bg-gradient-to-br from-blue-600 via-blue-500 to-purple-500 text-white bg-opacity-90 bg-pattern py-8 sm:py-12 lg:py-16 relative overflow-hidden pt-16"
+    className="hero-content min-h-screen flex items-center bg-gradient-to-br from-blue-600 via-blue-500 to-purple-500 text-white bg-opacity-90 bg-pattern py-8 sm:py-12 lg:py-16 relative overflow-hidden pt-28"
   >
  
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
