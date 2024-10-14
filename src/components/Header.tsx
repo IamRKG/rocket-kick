@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { motion } from 'framer-motion'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -36,9 +37,14 @@ const Header = () => {
   ]
 
   return (
-      <header className={`fixed w-full z-50 transition-all duration-300 ${
+    <motion.header 
+      className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white shadow-lg py-2' : 'bg-transparent py-4'
-      }`}>
+      }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link href="/" className={`text-xl sm:text-2xl font-bold transition duration-300 ${
@@ -50,27 +56,33 @@ const Header = () => {
           </Link>
           <div className="hidden md:flex space-x-1 lg:space-x-6">
             {navItems.map(({ href, label }) => (
-              <Link
+              <motion.div
                 key={href}
-                href={href}
-                className={`px-3 py-2 rounded-md text-sm lg:text-base transition duration-300 transform hover:scale-105 ${
-                  isActive(href)
-                    ? isScrolled
-                      ? 'bg-blue-100 text-blue-600 font-semibold'
-                      : 'bg-white bg-opacity-20 text-white font-semibold'
-                    : isScrolled
-                    ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                    : 'text-gray-200 hover:text-white hover:bg-white hover:bg-opacity-10'
-                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {label}
-              </Link>
+                <Link
+                  href={href}
+                  className={`px-3 py-2 rounded-md text-sm lg:text-base transition duration-300 ${
+                    isActive(href)
+                      ? isScrolled
+                        ? 'bg-blue-100 text-blue-600 font-semibold'
+                        : 'bg-white bg-opacity-20 text-white font-semibold'
+                      : isScrolled
+                      ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                      : 'text-gray-200 hover:text-white hover:bg-white hover:bg-opacity-10'
+                  }`}
+                >
+                  {label}
+                </Link>
+              </motion.div>
             ))}
           </div>
-          <button 
+          <motion.button 
             className="md:hidden focus:outline-none relative w-10 h-10 flex items-center justify-center"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
+            whileTap={{ scale: 0.95 }}
           >
             <div className="w-6 h-5 relative">
               <span className={`absolute w-full h-0.5 transform transition-all duration-300 ease-in-out ${
@@ -83,11 +95,15 @@ const Header = () => {
                 isScrolled ? 'bg-blue-600' : 'bg-white'
               } ${isMenuOpen ? '-rotate-45 top-2' : 'top-4'}`}></span>
             </div>
-          </button>
+          </motion.button>
         </div>
-        <div className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-  isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
-} ${isScrolled ? 'bg-white' : 'bg-black bg-opacity-70'}`}>
+        <motion.div 
+          className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+            isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+          } ${isScrolled ? 'bg-white' : 'bg-black bg-opacity-70'}`}
+          initial={false}
+          animate={{ height: isMenuOpen ? 'auto' : 0 }}
+        >
           {navItems.map(({ href, label }) => (
             <Link
               key={href}
@@ -106,9 +122,9 @@ const Header = () => {
               {label}
             </Link>
           ))}
-        </div>
+        </motion.div>
       </nav>
-    </header>
+    </motion.header>
   )
 }
 
